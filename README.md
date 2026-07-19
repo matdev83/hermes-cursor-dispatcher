@@ -21,6 +21,19 @@ hermes skills install https://raw.githubusercontent.com/matdev83/hermes-cursor-d
 
 Start a new Hermes session, then load `cursor-delegate` when delegating coding work.
 
+## Bundle
+
+```text
+skills/cursor-delegate/
+├── SKILL.md
+├── scripts/cursor_delegate.py
+└── templates/implementation-prompt.md
+```
+
+Hermes installs the referenced Python wrapper and prompt template with the skill. The skill runs the wrapper with `python3 ${HERMES_SKILL_DIR}/scripts/cursor_delegate.py`; no separate Python package installation is required.
+
+Repository-level tests are retained for contributors but are not installed with the skill.
+
 ## Test
 
 ```bash
