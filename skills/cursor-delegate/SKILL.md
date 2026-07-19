@@ -1,13 +1,13 @@
 ---
 name: cursor-delegate
-description: "Use when delegating repository-level coding, debugging, refactoring, or implementation work to the installed Cursor CLI (`agent`). Safely transfers exact UTF-8 prompts through a Python wrapper, prefers isolated Git worktrees, captures a structured result, and requires Hermes to inspect diffs and run validation independently before acceptance."
+description: "Use when delegating repository-level coding, debugging, refactoring, or implementation work to the installed Cursor CLI (`agent`). Safely transfers exact UTF-8 prompts through a Python wrapper, prefers isolated Git worktrees, captures a structured result, and requires Hermes to inspect diffs and run validation independently before acceptance. Integrates natively with the newest Grok models."
 version: 1.1.0
 author: matdev83
 license: MIT
 platforms: [linux, macos]
 metadata:
   hermes:
-    tags: [cursor, delegation, coding-agent, worktree, security, validation]
+    tags: [cursor, delegation, coding-agent, worktree, security, validation, grok]
     related_skills: [test-driven-development, requesting-code-review, systematic-debugging]
     requires_toolsets: [terminal, file]
     homepage: https://github.com/matdev83/hermes-cursor-dispatcher

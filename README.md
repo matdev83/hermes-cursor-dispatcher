@@ -2,6 +2,16 @@
 
 Hermes Agent skill for safely delegating repository work to Cursor CLI (`agent`). Includes exact prompt transport, worktree isolation, bounded output, process cleanup, and structured JSON results.
 
+> 🚀 **Tease the Future:** Run the newest **Grok models** (including `grok-4.5-xhigh`) directly via Cursor CLI integrations, keeping your coding agent state-of-the-art!
+
+## Key Features
+
+* **Latest LLM Capabilities**: Easily delegate implementation tasks leveraging the latest Grok models through Cursor CLI command-line execution.
+* **Isolated Worktrees**: Creates an isolated scratch Git worktree automatically (`git worktree add`) so Cursor never corrupts your main working branch or dirty files.
+* **Secure Stdin Prompt Transport**: Transports prompts via standard input to prevent shell interpretation exploits and avoid command line argument size limitations.
+* **Orphan Cleanup & Execution Bounds**: Monitors output buffers and enforces strict process group timeouts to clean up runaway sub-executors immediately.
+* **Independent Verification Loop**: Hermes validates Cursor's outputs through independent tests and diff reviews before accepting any modification.
+
 ## Install
 
 Requires Python 3.10+, Git, Hermes Agent, and an authenticated Cursor CLI.
