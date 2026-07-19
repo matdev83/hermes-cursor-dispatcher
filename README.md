@@ -19,28 +19,35 @@ Requires Python 3.10+, Git, Hermes Agent, and an authenticated Cursor CLI.
 ```bash
 hermes skills tap add matdev83/hermes-cursor-dispatcher
 hermes skills install matdev83/hermes-cursor-dispatcher/cursor-delegate --force --yes
+hermes skills install matdev83/hermes-cursor-dispatcher/orchestrate-cursor-delegation --yes
 ```
 
 Or install directly:
 
 ```bash
 hermes skills install https://raw.githubusercontent.com/matdev83/hermes-cursor-dispatcher/main/skills/cursor-delegate/SKILL.md --force --yes
+hermes skills install https://raw.githubusercontent.com/matdev83/hermes-cursor-dispatcher/main/skills/orchestrate-cursor-delegation/SKILL.md --yes
 ```
 
 `--force` is required because the community-skill scanner flags the wrapper's intentional subprocess execution. Inspect the skill before installing if desired.
 
-Start a new Hermes session, then load `cursor-delegate` when delegating coding work.
+`cursor-delegate` performs one safe Cursor invocation. The optional `orchestrate-cursor-delegation` skill executes an approved multi-task plan through one or more reviewed Cursor delegations and depends on `cursor-delegate` being installed.
+
+Start a new Hermes session, then load `cursor-delegate` for a single delegated task or `orchestrate-cursor-delegation` for an approved implementation plan.
 
 ## Bundle
 
 ```text
-skills/cursor-delegate/
-├── SKILL.md
-├── scripts/cursor_delegate.py
-└── templates/implementation-prompt.md
+skills/
+├── cursor-delegate/
+│   ├── SKILL.md
+│   ├── scripts/cursor_delegate.py
+│   └── templates/implementation-prompt.md
+└── orchestrate-cursor-delegation/
+    └── SKILL.md
 ```
 
-Hermes installs the referenced Python wrapper and prompt template with the skill. The skill runs the wrapper with `python3 ${HERMES_SKILL_DIR}/scripts/cursor_delegate.py`; no separate Python package installation is required.
+Hermes installs the referenced Python wrapper and prompt template with `cursor-delegate`. That skill runs the wrapper with `python3 ${HERMES_SKILL_DIR}/scripts/cursor_delegate.py`; no separate Python package installation is required. The orchestration skill contains instructions only and calls into the installed `cursor-delegate` workflow.
 
 Repository-level tests are retained for contributors but are not installed with the skill.
 
