@@ -51,7 +51,7 @@ Completion criterion: the `cursor-delegate` skill is available and Hermes knows 
 Before decomposition, inspect:
 
 - the approved plan and all additional user instructions;
-- repository guidance such as `.hermes.md`, `AGENTS.md`, or equivalent project rules;
+- the repository's already-loaded project guidance, architectural rules, and conventions;
 - repository root, branch, `HEAD`, worktree status, staged and untracked files;
 - relevant modules, interfaces, tests, architecture, naming, and style;
 - exact focused and project-level validation commands;
