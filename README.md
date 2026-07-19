@@ -1,31 +1,23 @@
 # Hermes Cursor Dispatcher
 
-Hermes Agent skill and Python wrapper for safely delegating repository coding tasks to Cursor CLI (`agent`).
-
-It provides exact UTF-8 prompt transport, Git/worktree checks, bounded output capture, process cleanup, structured JSON results, and independent-validation instructions for Hermes.
+Hermes Agent skill for safely delegating repository work to Cursor CLI (`agent`). Includes exact prompt transport, worktree isolation, bounded output, process cleanup, and structured JSON results.
 
 ## Install
 
-Requirements: Python 3.10+, Git, Hermes Agent, and an authenticated Cursor CLI.
+Requires Python 3.10+, Git, Hermes Agent, and an authenticated Cursor CLI.
 
 ```bash
-git clone https://github.com/matdev83/hermes-cursor-dispatcher.git ~/.hermes/skills/cursor-delegate
+hermes skills tap add matdev83/hermes-cursor-dispatcher
+hermes skills install matdev83/hermes-cursor-dispatcher/cursor-delegate
 ```
 
-Start a new Hermes session so the skill is discovered.
-
-## Use
+Or install directly:
 
 ```bash
-python3 ~/.hermes/skills/cursor-delegate/cursor_delegate.py \
-  --prompt-file /tmp/task.md \
-  --workspace /path/to/repo \
-  --timeout 3600 \
-  --mode edit \
-  --output-format json
+hermes skills install https://raw.githubusercontent.com/matdev83/hermes-cursor-dispatcher/main/skills/cursor-delegate/SKILL.md
 ```
 
-The default Cursor model is `grok-4.5-xhigh`; override it with `--model`.
+Start a new Hermes session, then load `cursor-delegate` when delegating coding work.
 
 ## Test
 

@@ -13,8 +13,9 @@ import time
 import pytest
 
 
-SKILL_DIR = Path(__file__).resolve().parents[1]
-WRAPPER = SKILL_DIR / "cursor_delegate.py"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SKILL_DIR = REPO_ROOT / "skills" / "cursor-delegate"
+WRAPPER = SKILL_DIR / "scripts" / "cursor_delegate.py"
 
 
 def run(

@@ -17,7 +17,7 @@ metadata:
 
 Use Cursor CLI as an external implementation executor, never as a source of truth. Hermes owns task construction, workspace selection, safe invocation, diff review, independent tests, corrective iterations, and the final acceptance decision.
 
-The wrapper is `cursor_delegate.py` in this skill directory. It reads an exact UTF-8 prompt from a file and sends it to Cursor through stdin without shell interpretation. Stdin transport was verified against Cursor CLI `agent`; this avoids Linux's per-argument size limit while preserving multiline prompts and shell metacharacters. The wrapper invokes `agent` with `shell=False`, explicit `cwd`, a narrowly allowlisted environment, a timeout, and an isolated process group. Dedicated drain threads retain bounded tails and bounded mode-0600 log prefixes; exceeding either output limit terminates the Cursor process group.
+The bundled wrapper is `scripts/cursor_delegate.py`; invoke it as `${HERMES_SKILL_DIR}/scripts/cursor_delegate.py`. It reads an exact UTF-8 prompt from a file and sends it to Cursor through stdin without shell interpretation. Stdin transport was verified against Cursor CLI `agent`; this avoids Linux's per-argument size limit while preserving multiline prompts and shell metacharacters. The wrapper invokes `agent` with `shell=False`, explicit `cwd`, a narrowly allowlisted environment, a timeout, and an isolated process group. Dedicated drain threads retain bounded tails and bounded mode-0600 log prefixes; exceeding either output limit terminates the Cursor process group.
 
 Never invoke Cursor by interpolating arbitrary prompt text into a shell command. Never use `eval`, `shell=True`, an environment variable as prompt transport, `echo`, or an unquoted heredoc.
 
@@ -85,7 +85,7 @@ Do not delegate a vague issue title. Completion criterion: Hermes can name the r
 Prefer the wrapper's worktree mode for non-trivial edits:
 
 ```bash
-python3 ~/.hermes/skills/cursor-delegate/cursor_delegate.py \
+python3 ${HERMES_SKILL_DIR}/scripts/cursor_delegate.py \
   --prompt-file /tmp/hermes-cursor-task.md \
   --workspace /path/to/repository \
   --isolate-worktree \
@@ -106,7 +106,7 @@ Completion criterion: the JSON result identifies an explicit workspace and start
 
 ### 3. Build a self-contained structured prompt
 
-Start from `templates/implementation-prompt.md`. Include:
+Start from bundled `templates/implementation-prompt.md` at `${HERMES_SKILL_DIR}/templates/implementation-prompt.md`. Include:
 
 - precise task and current behavior;
 - relevant files, modules, interfaces, and conventions;
@@ -139,7 +139,7 @@ Completion criterion: the prompt file's byte length and SHA-256 in the result ma
 Normal edit:
 
 ```bash
-python3 ~/.hermes/skills/cursor-delegate/cursor_delegate.py \
+python3 ${HERMES_SKILL_DIR}/scripts/cursor_delegate.py \
   --prompt-file /tmp/hermes-cursor-task.md \
   --workspace /tmp/hermes-cursor-example-8f31c2 \
   --timeout 3600 \
@@ -150,7 +150,7 @@ python3 ~/.hermes/skills/cursor-delegate/cursor_delegate.py \
 Read-only analysis defaults:
 
 ```bash
-python3 ~/.hermes/skills/cursor-delegate/cursor_delegate.py \
+python3 ${HERMES_SKILL_DIR}/scripts/cursor_delegate.py \
   --prompt-file /tmp/hermes-cursor-analysis.md \
   --workspace /path/to/repository \
   --timeout 900 \
