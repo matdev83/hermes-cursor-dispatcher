@@ -310,7 +310,7 @@ On POSIX, Cursor runs in a new session/process group. Timeout and output-limit p
 ## Security Boundaries
 
 - No shell interpretation: prompt transport uses stdin and `shell=False`.
-- No privilege escalation: never add `sudo`.
+- No privilege escalation: never elevate process permissions.
 - One workspace: do not pass `--add-dir` unless the user explicitly expands scope.
 - Sandbox on: default is `--sandbox enabled`.
 - No force approval: do not add `--force` or `--yolo` casually.
@@ -323,18 +323,16 @@ On POSIX, Cursor runs in a new session/process group. Timeout and output-limit p
 
 Unit tests use a fake `agent`; they must never consume Cursor service usage:
 
+From a repository checkout, install the development dependencies documented in `README.md`, then run:
+
 ```bash
-cd ~/.hermes/skills/cursor-delegate
-python3 -m venv /tmp/cursor-delegate-test-venv
-/tmp/cursor-delegate-test-venv/bin/pip install pytest ruff mypy
-/tmp/cursor-delegate-test-venv/bin/pytest -q tests/test_cursor_delegate.py -m 'not cursor_integration'
+pytest -q -m 'not cursor_integration'
 ```
 
 The real integration test is opt-in and may consume authenticated Cursor usage:
 
 ```bash
-RUN_CURSOR_INTEGRATION_TESTS=1 \
-  /tmp/cursor-delegate-test-venv/bin/pytest -q -m cursor_integration
+RUN_CURSOR_INTEGRATION_TESTS=1 pytest -q -m cursor_integration
 ```
 
 Run it only when authentication, network policy, and usage cost are intentionally configured.

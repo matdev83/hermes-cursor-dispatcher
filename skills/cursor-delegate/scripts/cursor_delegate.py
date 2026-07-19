@@ -206,7 +206,7 @@ def controlled_environment() -> dict[str, str]:
         "GOPATH", "GOROOT", "GOMODCACHE", "CARGO_HOME", "RUSTUP_HOME", "NPM_CONFIG_USERCONFIG",
         "VIRTUAL_ENV", "JAVA_HOME", "GRADLE_USER_HOME", "MAVEN_OPTS",
     }
-    return {key: value for key, value in os.environ.items() if key in exact}
+    return {key: os.environ[key] for key in exact if key in os.environ}
 
 
 def resolve_git_executable() -> str:

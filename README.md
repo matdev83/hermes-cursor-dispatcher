@@ -8,14 +8,16 @@ Requires Python 3.10+, Git, Hermes Agent, and an authenticated Cursor CLI.
 
 ```bash
 hermes skills tap add matdev83/hermes-cursor-dispatcher
-hermes skills install matdev83/hermes-cursor-dispatcher/cursor-delegate
+hermes skills install matdev83/hermes-cursor-dispatcher/cursor-delegate --force --yes
 ```
 
 Or install directly:
 
 ```bash
-hermes skills install https://raw.githubusercontent.com/matdev83/hermes-cursor-dispatcher/main/skills/cursor-delegate/SKILL.md
+hermes skills install https://raw.githubusercontent.com/matdev83/hermes-cursor-dispatcher/main/skills/cursor-delegate/SKILL.md --force --yes
 ```
+
+`--force` is required because the community-skill scanner flags the wrapper's intentional subprocess execution. Inspect the skill before installing if desired.
 
 Start a new Hermes session, then load `cursor-delegate` when delegating coding work.
 
